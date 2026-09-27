@@ -31,6 +31,7 @@ python3 -m cyberwarn
 - Brute Force доступов пользователей к веб-приложению
 - Фаззиниг заголовков
 - Поиск пользователей по нику в социальных сетях(в процессе разработки)
+- Клонирование страницы по URL
 
 > Есть возможность добавить прокси в *data/settings.json*
 
@@ -51,21 +52,22 @@ python3 -m cyberwarn
 ```
 Вывод будет примерно таким:
 ```sh
-|-------------------------------------------------------
-| author:       CyberWarn	https://gitea.com/cyberwarn
+|--------------------------------------------------------
+| author:       Rickert155	https://github.com/rickert155
 | project:      CyberWarn	GPLv3      
-| version:      0.3.0     
-|-------------------------------------------------------
-| CyberWarn 
+| version:      0.3.2     
+|--------------------------------------------------------
+| CyberWarn
 | [1] Сканер поддоменов: fuzz-subdomains
 | [2] Сканер директорий: fuzz-dirs
 | [3] Сборщик ссылок: get-links
 | [4] Сборщик комментариев: get-comments
 | [5] Сканер плагинов WordPress: wp-plugins
 | [6] Сканер версии WordPress: wp-version
-| [7] Брутфорс логина/пароля: bruteforce-login
+| [7] Brute Force логина/пароля: bruteforce-login
 | [8] Фаззинг заголовков: bad-headers
-| [8] Search for users on social networks: search-user
+| [9] Поиск по никнейму: search-user
+| [10] Клонирование страницы: clone-page
 ```
 Для просмотри с примерами команд:
 ```sh
@@ -137,6 +139,17 @@ python3 -m cyberwarn get-comments --url=https://example.com
 Пример использования:
 ```sh
 python3 -m cyberwarn bruteforce-login --url=https://example.com/login --users=data/wordlist/users.txt --passwords=data/wordlist/auth/passwords.txt --form="username=[USER]&password=[PASSWORD]" --fm="Invalid username or password."
+```
+
+### Фишинг/Социальная инженерия
+**Клонирование страницы**  
+Пример использования:
+```sh
+python3 -m cyberwarn clone-page --url=https://example.com --page-name=index.html
+```
+Аргумент *--page-name* - имя, под которым будет сохранена страница. Модуль выведет относительный путь сохранения страницы:
+```sh
+Результат: sites/example.com/example.html
 ```
 
 ## Запуск в контейнере
