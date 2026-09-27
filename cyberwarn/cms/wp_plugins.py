@@ -98,6 +98,7 @@ def parser_url(url_plugin):
         headers = Headers().create_headers()
         proxy = get_proxy()
         response = requests.get(url_plugin, headers=headers, proxies=proxy)
+        response.encoding = "utf-8"
         if response.status_code == 200:
             
             with count_find_lock:
