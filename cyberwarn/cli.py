@@ -98,6 +98,7 @@ COMMANDS = {
                 "args":["--user=", "--workers="],
                 "mode_test":True,
                 "example_username":"tester",
+                "example_url":None,
                 "template":"python3 -m cyberwarn search-user --user=username"
                 },
         "clone-page":{
