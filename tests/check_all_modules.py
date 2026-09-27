@@ -9,6 +9,7 @@ from cyberwarn.fuzz.fuzz_dirs import fuzz_dirs
 from cyberwarn.fuzz.get_links import get_links
 from cyberwarn.fuzz.get_comments import get_comments
 from cyberwarn.fuzz.bad_headers import bad_headers
+from cyberwarn.phishing.clone_page import clone_page
 
 def tests():
     user_url = None
@@ -27,6 +28,7 @@ def tests():
         example_username = COMMANDS[command].get("example_username")
         example_source_headers = COMMANDS[command].get("example_source_headers")
         example_user_payloads = COMMANDS[command].get("example_user_payloads")
+        example_page_name = COMMANDS[command].get("example_page_name")
         mode_test = COMMANDS[command].get("mode_test")
 
         if not mode_test:
@@ -46,6 +48,7 @@ def tests():
         if example_username:data["--user"] = example_username
         if example_source_headers:data["--headers"] = example_source_headers
         if example_user_payloads:data["--payloads"] = example_user_payloads
+        if example_page_name:data["--page-name"] = example_page_name
         
         if example_wordlist:
             data["--wordlist"] = example_wordlist

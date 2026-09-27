@@ -31,6 +31,7 @@ class CoreSetting:
                     "path_default_wp_plugin":"data/wp_plugins.txt",
                     "path_default__test_wp_plugin":"data/test_wp_plugins.txt",
                     "path_default_social_service":"data/social_services.json",
+                    "path_sites_dir":"sites",
                     "proxy":None
                     }
             with open(self.settings_path, "w") as file:
@@ -72,7 +73,7 @@ class CoreSetting:
                     #print(f"| {GREEN}[OK] config: {value}{RESET}")
                 else:
                     not_found_config.append(value)
-                    print(f"| {RED}[WARNING] config not found: {value}{RESET}")
+                    print(f"| {RED}[WARNING] dir/file not found: {value}{RESET}")
 
         return found_config, not_found_config
 

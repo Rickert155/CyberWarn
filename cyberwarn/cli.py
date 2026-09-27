@@ -15,6 +15,8 @@ from cyberwarn.fuzz.fuzz_dirs import fuzz_dirs
 from cyberwarn.fuzz.get_links import get_links
 from cyberwarn.fuzz.get_comments import get_comments
 from cyberwarn.fuzz.bad_headers import bad_headers
+from cyberwarn.phishing.clone_page import clone_page
+
 
 COMMANDS = {
         "fuzz-subdomains":{
@@ -97,6 +99,15 @@ COMMANDS = {
                 "mode_test":True,
                 "example_username":"tester",
                 "template":"python3 -m cyberwarn search-user --user=username"
+                },
+        "clone-page":{
+                "name":"Клонирование страницы",
+                "module":clone_page,
+                "args":["--url=", "--page-name="],
+                "mode_test":True,
+                "example_url":"https://example.com",
+                "example_page_name":"/index.html",
+                "template":"python3 -m cyberwarn clone-page --url=https://example.com --page-name=index.html"
                 }
         }
 
