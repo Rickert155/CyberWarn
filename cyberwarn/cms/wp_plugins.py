@@ -63,7 +63,7 @@ def parser_txt(response:str) -> dict[str]:
     all_line_readme = readme.split("\n")
     for count_line, line in enumerate(all_line_readme):
         if count_line == 0:
-            if "<!DOCTYPE" in line:
+            if "<!" in line:
                 return False
             plugin_name = line.replace("=", "").replace("\r", "").strip()
             data["plugin_name"] = plugin_name

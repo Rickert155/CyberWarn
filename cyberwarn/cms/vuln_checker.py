@@ -62,7 +62,7 @@ def response_vuln(plugin:dict[str], cms:str) -> dict[str]:
 
     url = (
             f"https://nvd.nist.gov/public/service/rest/json/nvd/cve/search/"
-            f"results?keyword={cms} [PLUGIN]&resultType=records"
+            f"results?keyword={cms} including, [PLUGIN] &resultType=records"
             )
     name, version = plugin["name"], plugin["version"]
     if " - " in name:name = name.split(" - ", 1)[0]
