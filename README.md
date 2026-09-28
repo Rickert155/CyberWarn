@@ -64,10 +64,11 @@ python3 -m cyberwarn
 | [4] Сборщик комментариев: get-comments
 | [5] Сканер плагинов WordPress: wp-plugins
 | [6] Сканер версии WordPress: wp-version
-| [7] Brute Force логина/пароля: bruteforce-login
-| [8] Фаззинг заголовков: bad-headers
-| [9] Поиск по никнейму: search-user
-| [10] Клонирование страницы: clone-page
+| [7] Проверка уязвимых версий плагинов CMS: vuln-checker
+| [8] Brute Force логина/пароля: bruteforce-login
+| [9] Фаззинг заголовков: bad-headers
+| [10] Поиск по никнейму: search-user
+| [11] Клонирование страницы: clone-page
 ```
 Для просмотри с примерами команд:
 ```sh
@@ -85,6 +86,22 @@ python3 -m cyberwarn wp-plugins --url=https://127.0.0.1:3000 --workers=20
 Пример использования:
 ```sh
 python3 -m cyberwarn wp-version --url=http://127.0.0.1:3000
+```
+
+**Проверка на наличие уязвимых плагинов**  
+Аргументом *--plugins-json* необходимо передать json файл, содержащий список, описывающий плагины приложения. Необходимые поля:  
+- plugin
+- version  
+Опциональные поля:  
+- url_plugin  
+url с тестируемого сайта, пример для WordPress: https://example.com/wp-content/plugins/plugin_name  
+
+Подобный файл генерирует модуль *wp-plugins*  
+
+Аргументом *--cms* необходимо указать CMS.  
+Пример использования:
+```sh
+python3 -m cyberwarn vuln-checker --plugins-json=app.plugins.json --cms=wordpress
 ```
 
 ### Анализ возможных поверхностей атак

@@ -6,6 +6,7 @@ import sys
 from cyberwarn.core.core import init, divide_line, greeting
 from __init__ import __project__
 from cyberwarn.core.colors import RED, RESET, BLUE, GREEN, BOLD, YELLOW
+from cyberwarn.cms.vuln_checker import vuln_check 
 from cyberwarn.cms.wp_plugins import scanWordPressPlugins
 from cyberwarn.cms.wp_version import scanWordPressVersion
 from cyberwarn.cracker.bruteforce_login import bruteforce_login
@@ -67,6 +68,15 @@ COMMANDS = {
             "mode_test":True,
             "template":"python3 -m cyberwarn wp-plugins --url=https://example.com --workers=10"
             },
+        "vuln-checker":{
+            "name":"Проверка уязвимых версий плагинов CMS",
+            "module": vuln_check,
+            "args":["--plugins-json=", "--cms="],
+            "example_url":"https://example.com",
+            "mode_test":False,
+            "template":"python3 -m cyberwarn wp-plugins-vuln --plugins-json=plugins.json --cms=wordpress",
+            "example_file":"data/"
+                },
         "wp-version":{
             "name":"Сканер версии WordPress",
             "module":scanWordPressVersion,

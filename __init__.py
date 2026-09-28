@@ -1,5 +1,5 @@
 __author__ = "Rickert155"
-__version__ = "0.3.21"
+__version__ = "0.3.3"
 __project__ = "CyberWarn"
 __authorurl__ = "https://github.com/rickert155"
 __license__ = "GPLv3"
