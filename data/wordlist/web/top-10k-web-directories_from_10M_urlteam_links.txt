@@ -1,4 +1,5 @@
 news
+webstats
 blog
 10
 11

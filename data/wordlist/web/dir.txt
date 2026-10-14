@@ -1,4 +1,5 @@
 admin
+webstats
 login
 logout
 signin
