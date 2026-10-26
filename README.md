@@ -157,7 +157,7 @@ python3 -m cyberwarn get-comments --url=https://example.com
 **Crawler**  
 Пример использования:
 ```sh
-python3 -m cyberwarn crawler --url=https://example.com
+python3 -m cyberwarn crawler --url=https://example.com --workers=10
 ```
 
 ### Взлом приложения, подбор учетных данных

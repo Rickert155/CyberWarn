@@ -4,18 +4,24 @@
 import requests
 import os
 import sys
+import time
 from cyberwarn.core.colors import RED, RESET, GREEN, BOLD, BLUE, YELLOW
 from cyberwarn.core.core import get_proxy, divide_line
 from cyberwarn.core.header import Headers
 
 from bs4 import BeautifulSoup
+from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
 
+BASE_URL = ""
+SITEMAP_FILE = ""
 RESULT_FILE = ""
 SITEMAP_URLS = []
 URLS = []
+FULL_LIST_URLS = []
 
 def recording_result(info:str) -> None:
-    with open(RESULT_FILE, "a+") as file:
+    with open(SITEMAP_FILE, "a+") as file:
         file.write(f"{info}\n")
 
 def get_url_from_robots(response:str, url:str):
@@ -171,22 +177,90 @@ def parsing_sitemapxml() -> None:
                     f"| {RED}status code: {BOLD}{status_code}{RESET}, "
                     f"| {RED}headers: {response.headers}{RESET}"
                     )
-            
+
+PROGRESS_URL_COUNT = 0
+progress_url_lock = Lock()
+full_list_urls_lock = Lock()
+
+def parser_page(url):
+    global PROGRESS_URL_COUNT
+    with progress_url_lock:
+        PROGRESS_URL_COUNT+=1
+        print(
+                f"| [{RED}{PROGRESS_URL_COUNT}{RESET}"
+                f"/{GREEN}{len(URLS)}{RESET}] "
+                f"{BOLD}{url}{RESET}"
+                )
+    with full_list_urls_lock:
+        if url not in FULL_LIST_URLS:
+            FULL_LIST_URLS.append(url)
+        with open(RESULT_FILE, "a+") as file:
+            file.write(f"{url}\n")
+
+    proxy = get_proxy()
+    headers = Headers().create_headers()
+    
+    response = requests.get(url, headers=headers, proxies=proxy)
+    status_code = response.status_code
+
+    if status_code == 200:
+        break_links = ("#", "tel:", "mailto:", "/#")
+        bs = BeautifulSoup(response.text, "lxml")
+        links = bs.find_all(["a", "link"])
+        if len(links) != 0:
+            for link in links:
+                link = link.attrs.get("href")
+                if link.startswith("/"):
+                    link = f"{BASE_URL}/{link[1:]}" 
+                if link.startswith(break_links):
+                    continue
+                if BASE_URL not in link:
+                    continue
+                with full_list_urls_lock:
+                    if link not in FULL_LIST_URLS:
+                        FULL_LIST_URLS.append(link)
+                        with open(RESULT_FILE, "a+") as file:
+                            file.write(f"{link}\n")
+                        print(f"| {GREEN}{link}{RESET}")
+
+
+def check_all_links(workers:int) -> None:
+    try:
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            executor.map(parser_page, URLS)
+    except Exception as err:
+        print(f"| {RED}{err}{RESET}")
 
 def crawler(args:dict[str]) -> None:
-    global RESULT_FILE
-    base_url = args["--url"]
+    global SITEMAP_FILE, RESULT_FILE, BASE_URL
+    BASE_URL = args["--url"]
+    workers = args["--workers"]
     template = args["template"]
-    if not base_url.startswith("https://") and not base_url.startswith("http://"):
+    if not BASE_URL.startswith("https://") and not BASE_URL.startswith("http://"):
         sys.exit(f"| {RED}Пример использования: {template}{RESET}")
 
-    if base_url[-1] == "/":base_url = base_url[:-1]
-    RESULT_FILE = base_url.split("://")[1]
-    if "/" in RESULT_FILE:RESULT_FILE = RESULT_FILE.split("/")[0]
-    RESULT_FILE = f"crawler-result.{RESULT_FILE}.txt"
-    if os.path.exists(RESULT_FILE):os.remove(RESULT_FILE)
+    try:
+        workers = int(workers)
+    except ValueError:
+        sys.exit(f"| {RED}Значение workers должно быть числовым{RESET}")
+
+    if BASE_URL[-1] == "/":BASE_URL = BASE_URL[:-1]
     
-    get_sitemap(url=base_url)
+    sitemap_prefix = "crawler-tmp"
+    crawler_prefix = "crawler"
+
+    SITEMAP_FILE = BASE_URL.split("://")[1]
+    if "/" in SITEMAP_FILE:SITEMAP_FILE = SITEMAP_FILE.split("/")[0]
+    
+    SITEMAP_FILE = f"{sitemap_prefix}.{SITEMAP_FILE}.txt"
+    if os.path.exists(SITEMAP_FILE):os.remove(SITEMAP_FILE)
+    RESULT_FILE = SITEMAP_FILE.replace(sitemap_prefix, crawler_prefix)
+    if os.path.exists(RESULT_FILE):os.remove(RESULT_FILE)
+
+    get_sitemap(url=BASE_URL)
     """Пассивная сборка ссылок - через sitemap"""
     parsing_sitemapxml()
-     
+    
+    """Обход всех URL для составления карты сайта"""
+    check_all_links(workers=workers)
+    if os.path.exists(SITEMAP_FILE):os.remove(SITEMAP_FILE)
