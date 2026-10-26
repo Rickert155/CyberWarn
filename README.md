@@ -33,6 +33,7 @@ python3 -m cyberwarn
 - Фаззиниг заголовков
 - Поиск пользователей по нику в социальных сетях(в процессе разработки)
 - Клонирование страницы по URL
+- Пассивный Crawler (на основе robots.txt и sitemap.xml)
 
 > Есть возможность добавить прокси в *data/settings.json*
 
@@ -151,6 +152,12 @@ python3 -m cyberwarn get-links --url=http://example.com
 Пример использования:
 ```sh
 python3 -m cyberwarn get-comments --url=https://example.com
+```
+
+**Crawler**  
+Пример использования:
+```sh
+python3 -m cyberwarn crawler --url=https://example.com
 ```
 
 ### Взлом приложения, подбор учетных данных

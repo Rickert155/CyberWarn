@@ -189,6 +189,4 @@ def crawler(args:dict[str]) -> None:
     get_sitemap(url=base_url)
     """Пассивная сборка ссылок - через sitemap"""
     parsing_sitemapxml()
-    for sitemap in SITEMAP_URLS:
-        print(sitemap)
      
