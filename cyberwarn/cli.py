@@ -10,6 +10,7 @@ from cyberwarn.cms.vuln_checker import vuln_check
 from cyberwarn.cms.wp_plugins import scanWordPressPlugins
 from cyberwarn.cms.wp_version import scanWordPressVersion
 from cyberwarn.cracker.bruteforce_login import bruteforce_login
+from cyberwarn.crawler.crawler_app import crawler
 from cyberwarn.social.search_users import search_users
 from cyberwarn.fuzz.fuzz_subdomain import fuzz_subdomains
 from cyberwarn.fuzz.fuzz_dirs import fuzz_dirs
@@ -85,6 +86,14 @@ COMMANDS = {
             "mode_test":True,
             "template":"python3 -m cyberwarn wp-version --url=https://example.com"
             },
+        "crawler":{
+                "name":"Crawler веб-приложений",
+                "module":crawler,
+                "args":["--url="],
+                "example_url":"https://example.com",
+                "mode_test":True,
+                "template":"python3 -m cyberwarn --crawler --url=https://example.com"
+                },
         "bruteforce-login":{
                 "name":"Brute Force логина/пароля",
                 "module":bruteforce_login,
