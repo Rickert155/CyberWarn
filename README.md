@@ -33,7 +33,7 @@ python3 -m cyberwarn
 - Фаззиниг заголовков
 - Поиск пользователей по нику в социальных сетях(в процессе разработки)
 - Клонирование страницы по URL
-- Пассивный Crawler (на основе robots.txt и sitemap.xml)
+- Crawler - создание карты сайта
 
 > Есть возможность добавить прокси в *data/settings.json*
 
@@ -57,7 +57,7 @@ python3 -m cyberwarn
 |--------------------------------------------------------
 | author:       Rickert155	https://github.com/rickert155
 | project:      CyberWarn	GPLv3      
-| version:      0.3.2     
+| version:      0.3.41     
 |--------------------------------------------------------
 | CyberWarn
 | [1] Сканер поддоменов: fuzz-subdomains
@@ -67,10 +67,11 @@ python3 -m cyberwarn
 | [5] Сканер плагинов WordPress: wp-plugins
 | [6] Сканер версии WordPress: wp-version
 | [7] Проверка уязвимых версий плагинов CMS: vuln-checker
-| [8] Brute Force логина/пароля: bruteforce-login
-| [9] Фаззинг заголовков: bad-headers
-| [10] Поиск по никнейму: search-user
-| [11] Клонирование страницы: clone-page
+| [8] Crawler веб-приложений: crawler
+| [9] Brute Force логина/пароля: bruteforce-login
+| [10] Фаззинг заголовков: bad-headers
+| [11] Поиск по никнейму: search-user
+| [12] Клонирование страницы: clone-page
 ```
 Для просмотри с примерами команд:
 ```sh

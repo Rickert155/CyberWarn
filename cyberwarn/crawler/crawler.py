@@ -51,6 +51,8 @@ def get_url_from_robots(response:str, url:str):
             for word in words:
                 if ("sitemap" in word and word.endswith(".xml")) and \
                         word not in SITEMAP_URLS:
+                    if word.startswith("/"):
+                        word = f"{BASE_URL}{word}"
                     SITEMAP_URLS.append(word)
             
         if len(index_links) != 0:
@@ -142,7 +144,11 @@ def parsing_sitemapxml() -> None:
                 f"| Sitemap: {RED}[{count}/{len(SITEMAP_URLS)}]{RESET} "
                 f"{sitemap}")
         headers = Headers().create_headers()
-        response = requests.get(sitemap, headers=headers, proxies=proxy)
+        try:
+            response = requests.get(sitemap, headers=headers, proxies=proxy)
+        except requests.exceptions.ConnectionError:
+            print(f"| {RED}Connection error: {BOLD}{sitemap}{RESET}")
+            return 
         status_code = response.status_code
         if status_code == 404:
             print(f"| {RED}sitemap {sitemap}: not found!{RESET}")
@@ -164,7 +170,7 @@ def parsing_sitemapxml() -> None:
                                 link not in SITEMAP_URLS:
                             SITEMAP_URLS.append(link)
                         else:
-                            if not link.endswith(content_ext) and\
+                            if not link.lower().endswith(content_ext) and\
                                     link not in URLS:
                                 URLS.append(link)
                                 recording_result(info=link)
@@ -210,8 +216,6 @@ def parser_page(url):
         if len(links) != 0:
             for link in links:
                 link = link.attrs.get("href")
-                if link.startswith("/"):
-                    link = f"{BASE_URL}/{link[1:]}" 
                 if link.startswith(break_links):
                     continue
                 if BASE_URL not in link:
