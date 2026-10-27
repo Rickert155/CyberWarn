@@ -62,7 +62,12 @@ def check_user(service:dict[str]) -> None:
 
         headers = Headers().create_headers()
         proxy = get_proxy()
-        response = requests.get(url, headers=headers, proxies=proxy)
+        response = requests.get(
+                url, 
+                headers=headers, 
+                proxies=proxy,
+                timeout=5
+                )
 
         text_result = response.text
         status_code = response.status_code
@@ -77,8 +82,11 @@ def check_user(service:dict[str]) -> None:
                     )
             recording_result(service=service, count=COUNT_FIND_USER)
         
+    except requests.exceptions.ReadTimeout:
+        print(f"{RED}{url} connection error!{RESET}")
+        return False
     except Exception as err:
-        print(err)
+        print(f"| {RED}{url} {err}{RESET}")
         return False
 
 
@@ -121,7 +129,7 @@ def search_users(args:dict[str]):
         if COUNT_FIND_USER == 0:
             sys.exit(
                     f"| [{COUNT_CHECK_USER}/{LEN_SOCIAL_SERVICES}] "
-                    f"{RED}user {BOLD}{user}{RESET} {RED}not defined{RESET}"
+                    f"{RED}user {BOLD}{user}{RESET} {RED}not found{RESET}"
                     )
 
     except KeyboardInterrupt:

@@ -116,6 +116,33 @@
 	    "fail_code":[404],
 	    "success_text":"Profile",
 	    "success_code":200
+    },
+    {
+	    "name":"AdmireMe.Vip",
+	    "category":"Content 18+",
+	    "url":"https://admireme.vip/[USER]/",
+	    "fail":"Ooops!",
+	    "fail_code":[404],
+	    "success_text":"AP Model",
+	    "success_code":200
+    },
+    {
+	    "name":"Cracked.ST",
+	    "category":"Forum",
+	    "url":"https://cracked.st/[USER]",
+	    "fail":"The member you specified",
+	    "fail_code":[404],
+	    "success_text":"Status",
+	    "success_code":200
+    },
+    {
+	    "name":"Image Fap",
+	    "category":"Content 18+",
+	    "url":"https://www.imagefap.com/profile/[USER]",
+	    "fail":"Not found",
+	    "fail_code":[404],
+	    "success_text":"Connect with ",
+	    "success_code":200
     }
 
 ]

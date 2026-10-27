@@ -118,7 +118,7 @@ COMMANDS = {
                 "mode_test":True,
                 "example_username":"tester",
                 "example_url":None,
-                "template":"python3 -m cyberwarn search-user --user=username"
+                "template":"python3 -m cyberwarn search-user --workers=10 --user=username"
                 },
         "clone-page":{
                 "name":"Клонирование страницы",
