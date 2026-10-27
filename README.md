@@ -93,12 +93,15 @@ python3 -m cyberwarn wp-version --url=http://127.0.0.1:3000
 
 **Проверка на наличие уязвимых плагинов**  
 Аргументом *--plugins-json* необходимо передать json файл, содержащий список, описывающий плагины приложения. Необходимые поля:  
-- plugin
-- version  
-
-Опциональные поля:  
-- url_plugin  
-url с тестируемого сайта, пример для WordPress: https://example.com/wp-content/plugins/plugin_name  
+```json
+[
+    {
+        "plugin":"Plugin name", # обязательно поле с именем плагина
+        "version":"2.1.0", # обязательное поле с версией плагина
+        "url_plugin":"https://example.com/wp-content/plugins/plugin/readme.txt" # опциальнальное поле с url до readme.txt для WordPress
+    }
+]
+```
 
 Подобный файл генерирует модуль *wp-plugins*  
 
