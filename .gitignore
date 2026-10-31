@@ -7,5 +7,5 @@ sites/*
 **/*.log
 !data/wordlist/*
 !data/*.json
+!data/settings.json
 data/test_*
-data/settings.json
