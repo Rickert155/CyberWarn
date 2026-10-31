@@ -2,9 +2,10 @@ sites/*
 **/venv/*
 **/__pycache__/*
 **/*.swp
-data/test_*
 *.json
 *.txt
 **/*.log
 !data/wordlist/*
 !data/*.json
+data/test_*
+data/settings.json
