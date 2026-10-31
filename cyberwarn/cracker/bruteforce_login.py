@@ -33,7 +33,7 @@ def send_form(user:str, password:str, fail_message:str, url:str, data_form:str):
     data = {}
     for field in fields:
         key, value = field.split("=")
-        value = value.replace("[USER]", user).replace("PASSWORD", password)
+        value = value.replace("[USER]", user).replace("[PASSWORD]", password)
         data[key] = value
 
     try:
