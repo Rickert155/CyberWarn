@@ -1,5 +1,3 @@
-# CyberWarn
-
 ![logo cyberwarn](https://github.com/Rickert155/Rickert155/blob/main/img/cyberwarnlogo.png)
 
 **CyberWarn** - Инструмент для автоматизированного выявления угроз кибер-безопасности, основанный на сканировании веб-приложений и проведении социотехнического тестирования (Social Engineering).  
