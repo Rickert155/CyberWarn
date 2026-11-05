@@ -17,6 +17,7 @@ from cyberwarn.fuzz.fuzz_dirs import fuzz_dirs
 from cyberwarn.fuzz.get_links import get_links
 from cyberwarn.fuzz.get_comments import get_comments
 from cyberwarn.fuzz.bad_headers import bad_headers
+from cyberwarn.fuzz.get_params import params_finder
 from cyberwarn.phishing.clone_page import clone_page
 
 
@@ -92,7 +93,15 @@ COMMANDS = {
                 "args":["--url=", "--workers="],
                 "example_url":"https://example.com",
                 "mode_test":True,
-                "template":"python3 -m cyberwarn --crawler --url=https://example.com --workers=10"
+                "template":"python3 -m cyberwarn crawler --url=https://example.com --workers=10"
+                },
+        "params-finder":{
+                "name":"Поиск и проверка возможных параметров в формах",
+                "module":params_finder,
+                "args":["--url=", "--wordlist=", "--workers="],
+                "example_url":"https://example.com",
+                "mode_test":True,
+                "template":"python3 -m cyberwarn params-finder --url=https://example.com --wordlist=wordlist.txt --workers=20"
                 },
         "bruteforce-login":{
                 "name":"Brute Force логина/пароля",

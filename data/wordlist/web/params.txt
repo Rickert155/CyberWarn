@@ -1,8 +1,2 @@
-?url=https://github.com/rickert155
-?redirect=https://github.com/rickert155
-?user=admin
-?user=1
-?id=1
-?id=-1
-?q=test
-?q=<img src=/ onerror=alert(`TEST XSS`) />
+url
+redirect
