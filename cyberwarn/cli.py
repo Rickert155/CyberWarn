@@ -101,7 +101,8 @@ COMMANDS = {
                 "args":["--url=", "--wordlist=", "--workers="],
                 "example_url":"https://example.com",
                 "mode_test":True,
-                "template":"python3 -m cyberwarn params-finder --url=https://example.com --wordlist=wordlist.txt --workers=20"
+                "template":"python3 -m cyberwarn params-finder --url=https://example.com --wordlist=wordlist.txt --workers=20",
+                "example_wordlist":"data/wordlist/web/test-params.txt"
                 },
         "bruteforce-login":{
                 "name":"Brute Force логина/пароля",
@@ -125,7 +126,7 @@ COMMANDS = {
                 "module":search_users,
                 "args":["--user=", "--workers="],
                 "mode_test":True,
-                "example_username":"tester",
+                "example_username":"cyberwarn",
                 "example_url":None,
                 "template":"python3 -m cyberwarn search-user --workers=10 --user=username"
                 },
