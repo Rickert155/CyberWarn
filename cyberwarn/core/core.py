@@ -93,7 +93,7 @@ def current_time() -> str:
     return time.strftime("%d/%m/%Y %H:%M:%S")
 
 
-def log_server_response(status:int, headers:str, url:str):
+def log_server_response(status:int, headers:str, url:str, file_name:str=False):
     line = "-"*60
     
     headers_text = ""
@@ -105,7 +105,7 @@ def log_server_response(status:int, headers:str, url:str):
             f"[{current_time()}] {url} {status}\n"
             f"{headers_text}\n"
             )
-    with open(LOG_FILE, "a+") as file:
+    with open(LOG_FILE if file_name == False else file_name, "a+") as file:
         file.write(text)
 
 def greeting() -> str:
