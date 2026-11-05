@@ -1,6 +1,6 @@
 # CyberWarn
 
-![logo cyberwarn](https://github.com/Rickert155/Rickert155/blob/main/img/cyberwarnlogo.png)
+<center>![logo cyberwarn](https://github.com/Rickert155/Rickert155/blob/main/img/cyberwarnlogo.png)</center>
 
 **CyberWarn** - Инструмент для автоматизированного выявления угроз кибер-безопасности, основанный на сканировании веб-приложений и проведении социотехнического тестирования (Social Engineering).  
 
@@ -36,6 +36,7 @@ python3 -m cyberwarn
 - Поиск пользователей по нику в социальных сетях(в процессе разработки)
 - Клонирование страницы по URL
 - Crawler - создание карты сайта
+- Params Finder - поиск параметров URL
 
 > Есть возможность добавить прокси в *data/settings.json*
 
@@ -70,10 +71,11 @@ python3 -m cyberwarn
 | [6] Сканер версии WordPress: wp-version
 | [7] Проверка уязвимых версий плагинов CMS: vuln-checker
 | [8] Crawler веб-приложений: crawler
-| [9] Brute Force логина/пароля: bruteforce-login
-| [10] Фаззинг заголовков: bad-headers
-| [11] Поиск по никнейму: search-user
-| [12] Клонирование страницы: clone-page
+| [9] Поиск и проверка возможных параметров в формах: params-finder
+| [10] Brute Force логина/пароля: bruteforce-login
+| [11] Фаззинг заголовков: bad-headers
+| [12] Поиск по никнейму: search-user
+| [13] Клонирование страницы: clone-page
 ```
 Для просмотри с примерами команд:
 ```sh
@@ -158,6 +160,12 @@ python3 -m cyberwarn get-links --url=http://example.com
 Пример использования:
 ```sh
 python3 -m cyberwarn get-comments --url=https://example.com
+```
+
+**Params finder**  
+Пример использования
+```sh
+python3 -m cyberwarn params-finder --url=https://example.com --wordlist=path/wordlist --workers=20
 ```
 
 **Crawler**  
