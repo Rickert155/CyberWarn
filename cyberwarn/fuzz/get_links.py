@@ -14,20 +14,31 @@ def recording_urls(file_name:str, urls:[]=None) -> None:
         for url in urls:
             file.write(f"{url}\n")
 
+def create_full_link(link:str, url:str):
+    if link[0] == "/":link = link[1:]
+    if "http" not in link and "://" not in link:
+        link = f"{url}/{link}"
+    return link
+
 def extract_links(response:str, url:str) -> list[str] | None:
     list_links = []
     try:
         bs = BeautifulSoup(response, "lxml")
-        all_links = bs.find_all(["a", "link"])
-        if len(all_links) > 0:
-            for link in all_links:
-                if link != None:
-                    link = link.attrs["href"]
-                    if link[0] == "/":link = link[1:]
-                    if "http" not in link and "://" not in link:
-                        link = f"{url}/{link}"
-                    if link not in list_links:
-                        list_links.append(link)
+        href_links = bs.find_all(["a", "link"])
+        src_links = bs.find_all(["script"])
+        
+        if len(href_links) > 0:
+            for link in href_links:
+                if link == None:continue
+                link = link.attrs["href"]
+                link = create_full_link(link=link, url=url)
+                if link not in list_links:list_links.append(link)
+        if len(src_links) > 0:
+            for link in src_links:
+                if link == None:continue
+                link = link.attrs["src"]
+                link = create_full_link(link=link, url=url)
+                if link not in list_links:list_links.append(link)
         return list_links
     except Exception as err:
         print(f"| {RED}ERROR Extraction: {err}{RESET}")
