@@ -67,7 +67,7 @@ def check_url(url:str) -> list[bool, dict|str]:
                             f"{text_headers}\n"
                             f"{'-'*50}\n"
                             )
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as err:
         pass
     except Exception as err:
         print(f"{RED}| Error parsing url: {url}{RESET}")

@@ -80,7 +80,7 @@ class CoreSetting:
 def get_proxy() -> dict[str]|None:
     proxy = CoreSetting().get_settings()["proxy"]
     if proxy:
-        return {"https":proxy}
+        return {"http":proxy}
     else:
         return None
 
