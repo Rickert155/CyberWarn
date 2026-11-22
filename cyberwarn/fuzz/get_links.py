@@ -53,15 +53,16 @@ def get_links(args:dict[str]) -> None:
     if url[-1] == "/":url = url[:-1]
     try:
         headers = Headers().create_headers()
-        headers["Host"] = url.split("://")[1]
         proxy = get_proxy()
 
         response = requests.get(url, headers=headers, proxies=proxy)
         status_code = response.status_code
+        print(response.text)
         if response.status_code == 200:
             links = extract_links(response=response.text, url=url)
             if len(links) > 0:
                 file_name = f"{url.split("://")[1]}.links.txt"
+                file_name = file_name.replace("/", "-")
                 recording_urls(urls=links, file_name=file_name)
                 for count, link in enumerate(links, start=1):
                     print(f"| [{count}] {GREEN}{link}{RESET}")
