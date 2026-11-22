@@ -57,7 +57,6 @@ def get_links(args:dict[str]) -> None:
 
         response = requests.get(url, headers=headers, proxies=proxy)
         status_code = response.status_code
-        print(response.text)
         if response.status_code == 200:
             links = extract_links(response=response.text, url=url)
             if len(links) > 0:
