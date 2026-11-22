@@ -10,6 +10,7 @@ COPY packages.txt .
 COPY data data/
 COPY cyberwarn cyberwarn/
 COPY tests tests/
+RUN find . -iname "__pycache__" -exec rm -rf {} +
 
 RUN python3 -m venv venv && ./venv/bin/pip install -r packages.txt
 RUN echo "source /root/cyberwarn/venv/bin/activate.fish" > /root/.config/fish/config.fish
