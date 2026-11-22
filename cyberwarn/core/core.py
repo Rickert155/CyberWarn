@@ -32,7 +32,7 @@ class CoreSetting:
                     "path_default__test_wp_plugin":"data/test_wp_plugins.txt",
                     "path_default_social_service":"data/social_services.json",
                     "path_sites_dir":"sites",
-                    "proxy":None
+                    "proxy":{"schema":"", "protocol":""}
                     }
             with open(self.settings_path, "w") as file:
                 json.dump(data, file, indent=4)
@@ -79,8 +79,8 @@ class CoreSetting:
 
 def get_proxy() -> dict[str]|None:
     proxy = CoreSetting().get_settings()["proxy"]
-    if proxy:
-        return {"http":proxy}
+    if proxy["schema"] and proxy["protocol"]:
+        return {proxy["schema"]:proxy["protocol"]}
     else:
         return None
 

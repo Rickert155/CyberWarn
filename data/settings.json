@@ -4,6 +4,9 @@
     "path_default_wp_plugin": "data/wp_plugins.txt",
     "path_default__test_wp_plugin": "data/test_wp_plugins.txt",
     "path_default_social_service": "data/social_services.json",
-    "path_sites_dir":"sites",
-    "proxy":"socks5://127.0.0.1:1080" 
+    "path_sites_dir": "sites",
+    "proxy": {
+        "schema": "https",
+        "protocol": "socks5h://127.0.0.1:1080"
+    }
 }
