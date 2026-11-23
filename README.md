@@ -39,6 +39,7 @@ python3 -m cyberwarn
 > Есть возможность добавить прокси в *data/settings.json*
 
 ## Тестирование/отладка
+> **Для тестов всех модулей требуются доработки**  
 Для проверки всех модулей используется tests/check_all_modules
 ```sh
 python3 -m tests.check_all_modules
