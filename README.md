@@ -58,7 +58,7 @@ python3 -m cyberwarn
 |--------------------------------------------------------
 | author:       Rickert155	https://github.com/rickert155
 | project:      CyberWarn	GPLv3      
-| version:      0.3.41     
+| version:      version 
 |--------------------------------------------------------
 | CyberWarn
 | [1] Сканер поддоменов: fuzz-subdomains
@@ -205,9 +205,9 @@ podman run --rm -it -v $PWD/data:/root/cyberwarn/data cyberwarn
 ## Готовый образ Podman/Docker
 Наиболее протестированные версии доступны в формате образов. Доступны на github и docker.io
 ```sh
-podman pull ghcr.io/rickert155/cyberwarn:0.3.52
+podman pull ghcr.io/rickert155/cyberwarn:0.3.57
 ```
 Так же вы можете брать образ из Docker Hub
 ```sh
-podman pull docker.io/cyberwarn/cyberwarn:0.3.52
+podman pull docker.io/cyberwarn/cyberwarn:0.3.57
 ```
