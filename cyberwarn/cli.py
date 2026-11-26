@@ -107,9 +107,9 @@ COMMANDS = {
         "bruteforce-login":{
                 "name":"Brute Force логина/пароля",
                 "module":bruteforce_login,
-                "args":["--url=", "--users=", "--passwords=", "--form=", "--fm="],
+                "args":["--url=", "--users=", "--passwords=", "--form=", "--fm=", "--workers="],
                 "example_url":"https://example.com",
-                "template":"python3 -m cyberwarn bruteforce-login --url=https://example.com --users=users.txt --passwords=passwords.txt --form=\"username=[USER]&password=[PASSWORD]\" --fm=\"Incorrect password\""
+                "template":"python3 -m cyberwarn bruteforce-login --url=https://example.com --users=users.txt --passwords=passwords.txt --form=\"username=[USER]&password=[PASSWORD]\" --fm=\"Incorrect password\" --workers=100"
                 },
         "bad-headers":{
                 "name":"Фаззинг заголовков",
